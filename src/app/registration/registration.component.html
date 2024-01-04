@@ -1,1 +1,117 @@
-<p>registration works!</p>
+<div
+  class="flex w-100 bg-auth bg-cover bg-center h-screen items-center justify-center"
+>
+  <div
+    class="bg-white w-[600px] min-h-[450px] pt-10 pb-10 pl-20 pr-20 rounded-lg shadow-md"
+  >
+    @if(registrationForm){
+    <form class="max-w-lg mx-auto" [formGroup]="registrationForm">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="username">
+          Имя пользователя
+        </label>
+        <input
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="username"
+          type="text"
+          placeholder="Введите имя пользователя"
+          formControlName="username"
+        />
+        @if(f.username.errors&&(f.username.dirty||f.username.touched)){
+        <div>
+          @if(f.username.errors.required){
+          <small class="text-red-500"
+            >Поле username обязательно для заполнения</small
+          >
+          }@if(f.username.errors.username){
+          <small class="text-red-500"
+            >Поле username не должно превышать 15 символов</small
+          >
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="email">
+          Email
+        </label>
+        <input
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="email"
+          type="email"
+          placeholder="Введите email"
+          formControlName="email"
+          autocomplete="email"
+        />
+        @if(f.email.errors&&(f.email.dirty||f.email.touched)){
+        <div>
+          @if(f.email.errors.required){
+          <small class="text-red-500"
+            >Поле email обязательно для заполнения</small
+          >
+          }@if(f.email.errors.email){
+          <small class="text-red-500">Не верный формат email</small>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="password">
+          Пароль
+        </label>
+        <input
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="password"
+          type="password"
+          placeholder="Введите пароль"
+          formControlName="password"
+          autocomplete="new-password"
+        />
+        @if(f.password.errors&&(f.password.dirty||f.password.touched)){
+        <div>
+          @if(f.password.errors.required){
+          <small class="text-red-500"
+            >Поле password обязательно для заполнения</small
+          >
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 font-bold mb-2"
+          for="confirm-password"
+        >
+          Подтвердите пароль
+        </label>
+        <input
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="confirm_password"
+          type="password"
+          placeholder="Подтвердите пароль"
+          formControlName="confirm_password"
+          autocomplete="new-password"
+        />
+        @if(registrationForm.value.password!==registrationForm.value.confirm_password){
+        <small class="text-red-500">Пароли не совпадают</small>
+        }
+      </div>
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="button"
+          (click)="onSaveRegistration()"
+        >
+          Зарегистрироваться
+        </button>
+        <a
+          class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+          [routerLink]="['/auth']"
+        >
+          Уже зарегистрированы?
+        </a>
+      </div>
+    </form>
+    }
+  </div>
+</div>

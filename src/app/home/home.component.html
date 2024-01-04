@@ -1,4 +1,12 @@
-<h1 class="text-2xl font-bold mb-4 ml-10">Список постов</h1>
+<div class="flex items-center justify-between mt-10">
+  <h1 class="text-2xl font-bold mb-4 ml-10">Список постов</h1>
+  <button
+    class="mr-10 border text-black bg-blue-500 text-white hover:border-blue-500 hover:bg-white hover:text-black py-2 px-4 rounded"
+    (click)="showModal = true"
+  >
+    Создать пост
+  </button>
+</div>
 
 <div
   *ngFor="let post of posts | paginate : { itemsPerPage: 10, currentPage: p }"
@@ -9,6 +17,7 @@
   <p class="mb-4">{{ post.body }}</p>
   <button
     class="border border-red-500 bg-white text-black hover:bg-red-500 hover:text-white py-2 px-4 rounded"
+    (click)="onDeletePosts(post.id)"
   >
     Удалить пост
   </button>
@@ -16,4 +25,100 @@
 
 <div class="ml-10 mr-10 mt-10">
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- Модальное окно -->
+<div
+  class="fixed z-10 inset-0 overflow-y-auto"
+  [ngClass]="{ hidden: !showModal }"
+>
+  <div
+    class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+  >
+    <div
+      class="fixed inset-0 transition-opacity"
+      aria-hidden="true"
+      (click)="showModal = false"
+    >
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-headline"
+    >
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <h3
+          class="text-lg leading-6 font-medium text-gray-900 mb-4"
+          id="modal-headline"
+        >
+          Создание поста
+        </h3>
+        <form #postForm="ngForm">
+          <div class="mb-4" ngModelGroup="title">
+            <label class="block text-gray-700 font-bold mb-2" for="title">
+              Заголовок
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="title"
+              type="text"
+              placeholder="Введите заголовок"
+              name="title"
+              [(ngModel)]="titlePost"
+              required
+            />
+          </div>
+          <div class="mb-4" ngModelGroup="name">
+            <label class="block text-gray-700 font-bold mb-2" for="name">
+              Имя пользователя
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+              placeholder="Введите имя пользователя"
+              name="name"
+              [(ngModel)]="namePost"
+              required
+            />
+          </div>
+          <div class="mb-4" ngModelGroup="body">
+            <label class="block text-gray-700 font-bold mb-2" for="body">
+              Текст поста
+            </label>
+            <textarea
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="body"
+              rows="5"
+              placeholder="Введите текст поста"
+              name="body"
+              [(ngModel)]="bodyPost"
+              required
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div
+        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse flex items-center justify-between"
+      >
+        <button
+          type="button"
+          class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+          (click)="onSavePost()"
+        >
+          Сохранить
+        </button>
+        <button
+          type="button"
+          class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+          (click)="showModal = false"
+        >
+          Закрыть
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

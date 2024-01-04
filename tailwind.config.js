@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: (theme) => ({
+        auth: "url('/assets/auth.jpg')",
+      }),
+    },
   },
   plugins: [],
 };
