@@ -65,13 +65,5 @@ export class RegistrationComponent implements OnInit {
         this.errorMessage = error;
       },
     });
-    // this.myService.getInfoUser(3).subscribe({
-    //   next: (user) => {
-    //     console.log(user);
-    //   },
-    //   error: (error) => {
-    //     this.errorMessage = error;
-    //   },
-    // });
   }
 }

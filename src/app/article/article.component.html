@@ -1,1 +1,75 @@
-<p>article works!</p>
+<header
+  class="bg-blue-500 text-white flex justify-between items-center px-4 py-3"
+>
+  <div class="flex items-center">
+    <img
+      src="https://via.placeholder.com/40"
+      alt="User Avatar"
+      class="rounded-full mr-3"
+    />
+    <div>
+      <h3 class="font-bold text-lg">{{ user.userName }}</h3>
+      <p class="text-gray-400 text-sm">{{ user.email }}</p>
+    </div>
+  </div>
+  <button
+    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+    (click)="showModal = true"
+  >
+    Выйти
+  </button>
+</header>
+@if(post){
+<div class="px-10 py-4 border border-gray-300 shadow-md ml-10 mr-10 mt-20">
+  <h2 class="text-lg font-bold mb-2">Заголовок Поста: {{ post.title }}</h2>
+  <h4 class="text-lg font-bold mb-2">Имя пользователя: {{ post.name }}</h4>
+  <p class="mb-4">{{ post.body }}</p>
+</div>
+}
+
+<div
+  class="fixed z-10 inset-0 overflow-y-auto"
+  [ngClass]="{ hidden: !showModal }"
+>
+  <div
+    class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+  >
+    <div class="modal-dialog w-full sm:w-1/2 lg:w-1/3 xl:w-1/4" role="document">
+      <div class="modal-content bg-white rounded-lg shadow-lg">
+        <div
+          class="modal-header bg-gray-200 py-2 px-4 rounded-t-lg flex justify-between items-center"
+        >
+          <h5 class="modal-title text-lg font-bold">Точно выйти?</h5>
+          <button
+            type="button"
+            class="close text-gray-600 hover:text-gray-800"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="showModal = false"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <p>
+          Если вы выйдите то локал сторадж очистится и придется снова проходить
+          регистрацию, это приложение написано без рестфул апи
+        </p>
+        <div
+          class="modal-footer bg-gray-100 py-2 px-4 rounded-b-lg flex justify-end"
+        >
+          <button
+            type="button"
+            class="btn btn-secondary mr-2"
+            data-dismiss="modal"
+            (click)="showModal = false"
+          >
+            Отмена
+          </button>
+          <button type="button" class="btn btn-primary" (click)="logout()">
+            Выйти
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

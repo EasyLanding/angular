@@ -92,4 +92,9 @@ export class ApiServiceService {
     const url = `http://localhost:3000/users/${id}`;
     return this.http.get<UserCreateI>(url);
   }
+
+  getPostById(id: number): Observable<PostI> {
+    const url = `${this.baseUrl}/posts/${id}`;
+    return this.http.get<PostI>(url);
+  }
 }
