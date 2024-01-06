@@ -48,7 +48,9 @@ export class HomeComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
     private toastr?: ToastrService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     const localStorage = this.document.defaultView?.localStorage;
     if (localStorage) {
       const user = localStorage.getItem('currentUser');
@@ -57,9 +59,6 @@ export class HomeComponent implements OnInit {
       }
     }
     this.authService.checkAuth();
-  }
-
-  ngOnInit(): void {
     this.myService.getPosts().subscribe({
       next: (posts) => {
         this.posts = posts;

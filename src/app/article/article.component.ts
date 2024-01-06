@@ -25,7 +25,9 @@ export class ArticleComponent implements OnInit {
     private authService: AuthService,
     @Inject(DOCUMENT) private document: Document,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit() {
     const localStorage = this.document.defaultView?.localStorage;
     if (localStorage) {
       const user = localStorage.getItem('currentUser');
@@ -34,9 +36,6 @@ export class ArticleComponent implements OnInit {
       }
     }
     this.authService.checkAuth();
-  }
-
-  ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.getPostById(Number(id)).subscribe({
       next: (post) => {
