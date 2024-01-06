@@ -53,7 +53,10 @@ export class RegistrationComponent implements OnInit {
       });
       return;
     }
-
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify(this.registrationForm?.value)
+    );
     this.myService.createUser(this.registrationForm?.value).subscribe({
       next: (user) => {
         this.toastr?.success('Успешная регистрация', 'Успешно', {
