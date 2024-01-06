@@ -53,6 +53,9 @@ export class RegistrationComponent implements OnInit {
       });
       return;
     }
+    this.toastr?.success('Успешная регистрация', 'Успешно', {
+      timeOut: 5000,
+    });
     localStorage.setItem(
       'currentUser',
       JSON.stringify(this.registrationForm?.value)
