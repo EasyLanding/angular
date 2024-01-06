@@ -1,11 +1,11 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnInit {
   data = {};
 
   constructor(
@@ -20,11 +20,11 @@ export class AuthService {
       }
     }
   }
-
-  checkAuth(): void {
+  ngOnInit() {
     if (!this.data) {
       this.router.navigate(['/auth']);
       return;
     }
   }
+  checkAuth(): void {}
 }
