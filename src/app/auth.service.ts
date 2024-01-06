@@ -11,8 +11,7 @@ export class AuthService implements OnInit {
   constructor(
     private router: Router,
     @Inject(DOCUMENT) private document: Document
-  ) {}
-  ngOnInit() {
+  ) {
     const localStorage = this.document.defaultView?.localStorage;
     if (localStorage) {
       const user = localStorage.getItem('currentUser');
@@ -21,5 +20,6 @@ export class AuthService implements OnInit {
       }
     }
   }
+  ngOnInit() {}
   checkAuth(): void {}
 }
